@@ -1,0 +1,58 @@
+Leetcode:https://leetcode.com/discuss/interview-question/algorithms/124724/facebook-onsite-count-occurrences-of-a-number-in-a-sorted-array
+
+
+Note: This is slight variation of the above question:
+      Just return (last_index - first_index)+1
+      
+ 
+ 
+ 
+arr = [1,1,2,2,2,2,3]
+k = 4
+def search_first(arr,k):
+    start = 0
+    end = len(arr) -1
+    temp = -1
+    while start <= end:
+        mid = start + (end-start)//2
+        if arr[mid] == k:
+            temp = mid
+            # Check for 1st occurance
+            end = mid-1
+
+
+        elif k > arr[mid]:
+            start = mid+1
+        else:
+            end = mid-1
+    if temp != -1:
+        return temp
+    else:
+        return -1
+
+def search_second(arr,k):
+    start = 0
+    end = len(arr) -1
+    temp = -1
+    while start <= end:
+        mid = start + (end-start)//2
+        if arr[mid] == k:
+            temp = mid
+            # Check for Last occurance
+            start = mid+1
+
+
+        elif k > arr[mid]:
+            start = mid+1
+        else:
+            end = mid-1
+    if temp != -1:
+        return temp
+    else:
+        return -1
+
+lis = []
+lis.append(search_first(arr,k))
+lis.append(search_second(arr,k))
+print(lis)
+print(lis[1]-lis[0]+1)
