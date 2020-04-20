@@ -1,0 +1,51 @@
+Leetcode:https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/
+
+
+Code:
+
+def search_first(arr,k):
+    start = 0
+    end = len(arr) -1
+    temp = -1
+    while start <= end:
+        mid = start + (end-start)//2
+        if arr[mid] == k:
+            temp = mid
+            # Check for 1st occurance
+            end = mid-1
+
+
+        elif k > arr[mid]:
+            start = mid+1
+        else:
+            end = mid-1
+    if temp != -1:
+        return temp
+    else:
+        return -1
+
+def search_second(arr,k):
+    start = 0
+    end = len(arr) -1
+    temp = -1
+    while start <= end:
+        mid = start + (end-start)//2
+        if arr[mid] == k:
+            temp = mid
+            # Check for Last occurance
+            start = mid+1
+
+
+        elif k > arr[mid]:
+            start = mid+1
+        else:
+            end = mid-1
+    if temp != -1:
+        return temp
+    else:
+        return -1
+
+lis = []
+lis.append(search_first(arr,k))
+lis.append(search_second(arr,k))
+print(lis)
