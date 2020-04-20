@@ -1,0 +1,62 @@
+# Additional info:
+The time complexity of binary search is:-
+
+Best Case- O(1) i.e. constant.
+Average Case- O(logn).
+Worst Case- O(logn).
+But in general when someone ask about the time complexity bydefault he/she asking for Worst case only. So you can simply go with O(logn).
+
+
+# linear approach not binary search
+
+def find_linear(arr,k): 
+    for idx,value in enumerate(arr):
+        if value == k:
+            return idx
+        else:
+            return -1
+
+
+# iterative approach
+
+def find_iter(arr,k): 
+    arr.sort()
+    start = 0
+    end = len(arr)-1
+
+
+    while start <= end:
+        mid = (start + end) // 2       # Use: start + (end-start)//2 to prevent integer overflow
+        if arr[mid] == k:
+            return mid
+        elif arr[mid] > k:
+            # lower half
+            end = mid - 1
+            
+        else:
+            start = mid + 1
+
+            
+    return -1
+
+
+# recursive approach
+def find_rec(arr,start,end,k):
+    arr.sort()
+    if start > end: # this is the base calls when this happens exit the loop
+        return -1
+    mid = (start+end)//2
+
+    if arr[mid] == k:
+        return mid
+    else:
+        if arr[mid] > k:
+            return find(arr,start,mid-1,k)
+        else:
+            return find(arr,mid+1,end,k)
+
+
+
+arr = [1,2,3,4,50,60,70,80]
+
+print(find_linear(arr,0))  # use zero indexing
