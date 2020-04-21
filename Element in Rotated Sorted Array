@@ -1,0 +1,61 @@
+Leetcode: https://leetcode.com/problems/search-in-rotated-sorted-array/
+
+Code:
+
+
+class Solution:
+    def search(self, arr: List[int], k: int) -> int:
+        if len(arr) == 0:
+            return -1
+        
+        
+        def search_min(arr):
+            start = 0
+            end = len(arr)-1
+            N = len(arr)
+            # Check if array is rotated sorted or simply sorted:
+            if arr[start] <= arr[end]:
+                return start
+
+            # Now check if middle element is min for not
+
+            while start <= end:
+                mid = start + (end-start)//2
+                next = (mid+1)%N
+                prev = (mid-1+N)%N
+
+                if arr[mid] <= arr[next] and arr[mid] <= arr[prev]:
+                    return mid
+
+                # if mid element is not min then look for min in unsorted part of the array
+
+                elif arr[mid] <=  arr[end]:
+                    # means right side is sorted search in left half
+                    end = mid-1
+                elif arr[mid] >= arr[start]:
+                    # means left half is sorted look in right for min
+                    start = mid+1
+            return -1
+        min_idx = search_min(arr)
+        
+        # call Two Binary search as we have now two sorted arrays:
+        # 1 - From start to mid-1
+        # 2 - From mid to end
+        
+        def binary_search(arr,start,end,k):
+            while start <= end:
+                mid = start + (end-start)//2
+                if arr[mid] == k:
+                    return mid
+                elif k > arr[mid]:
+                    start = mid+1
+                else:
+                    end = mid-1
+            return -1
+        
+        x = binary_search(arr,0,min_idx-1,k)
+        y  = binary_search(arr,min_idx,len(arr)-1,k)
+       
+        return max(x,y)
+        
+        
