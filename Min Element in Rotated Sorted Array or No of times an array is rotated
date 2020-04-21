@@ -1,0 +1,37 @@
+
+Leetcode: https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/
+
+
+
+arr = [4,5,6,7,0,1,2]
+
+
+def search(arr):
+    start = 0
+    end = len(arr)-1
+    N = len(arr)
+    # Check if array is rotated sorted or simply sorted:
+    if arr[start] <= arr[end]:
+        return start
+
+    # Now check if middle element is min for not
+
+    while start <= end:
+        mid = start + (end-start)//2
+        next = (mid+1)%N
+        prev = (mid-1+N)%N
+
+        if arr[mid] <= arr[next] and arr[mid] <= arr[prev]:
+            return mid
+
+        # if mid element is not min then look for min in unsorted part of the array:
+
+        elif arr[mid] <=  arr[end]:
+            # means right side is sorted search in left half
+            end = mid-1
+        elif arr[mid] >= arr[start]:
+            # means left half is sorted look in right for min
+            start = mid+1
+    return -1
+
+print(search(arr))
