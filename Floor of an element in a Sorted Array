@@ -1,0 +1,58 @@
+Given a sorted array and a value x, the floor of x is the largest element in array smaller than or equal to x. Write efficient functions to find floor of x.
+
+Examples:
+
+Input : arr[] = {1, 2, 8, 10, 10, 12, 19}, x = 5
+Output : 2
+
+Explanation : 2 is the largest element in 
+arr[] smaller than 5.
+
+Input : arr[] = {1, 2, 8, 10, 10, 12, 19}, x = 20
+Output : 19
+Explanation :19 is the largest element in
+arr[] smaller than 20.
+
+Input : arr[] = {1, 2, 8, 10, 10, 12, 19}, x = 0
+Output : -1
+Explanation :Since floor doesn't exist,
+output is -1.
+
+
+Code:
+arr = [1, 2, 4, 6, 10, 12, 14]
+k = 7
+def search(arr):
+    s = 0
+    e = len(arr)-1
+    
+    # Two Base Cases:
+    
+    if arr[0] > k:   # if the 1st element of the array is largest the element whose floor needs to be find then there is no such number
+        return -1
+    if k > arr[-1]: # if k is greater than the largest element in the array return the largest element
+        return arr[e]
+
+    temp = 0  # variable to store the min value
+    
+    while s <= e:
+        mid = s + (e-s)//2
+        if arr[mid] == k:
+            return arr[mid]
+        elif k < arr[mid]:  # Look in the left half
+            e = mid-1
+            if arr[mid] < k:  # if middle turns out to the lesser than k store it in temp and look for right half for larger value. 
+                if arr[mid] > temp:
+                    temp = arr[mid]
+                    s = mid+1
+        else:
+            s = mid+1
+            if arr[mid] < k:
+                if arr[mid] > temp:
+                    temp = arr[mid]
+                    s = mid+1
+    return temp  # return the updated floor value
+
+print(search(arr))
+
+
