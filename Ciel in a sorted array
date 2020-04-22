@@ -1,0 +1,40 @@
+Given a sorted array and a value x, the ceiling of x is the smallest element in array greater than or equal to x, and the floor is the greatest element smaller than or equal to x. Assume than the array is sorted in non-decreasing order. Write efficient functions to find floor and ceiling of x.
+
+Examples :
+
+For example, let the input array be {1, 2, 8, 10, 10, 12, 19}
+For x = 0:    floor doesn't exist in array,  ceil  = 1
+For x = 1:    floor  = 1,  ceil  = 1
+For x = 5:    floor  = 2,  ceil  = 8
+For x = 20:   floor  = 19,  ceil doesn't exist in array
+
+
+
+
+
+Code:
+
+arr = [1, 2, 8,10,10,12,19]
+k = 0
+def search(arr):
+    s = 0
+    e = len(arr)-1
+    if arr[0] > k:
+        return arr[0]
+    if k > arr[-1]:
+        return "does not exit"
+
+    temp = 0
+    while s <= e:
+        mid = s + (e-s)//2
+        if arr[mid] == k:
+            return arr[mid]
+        elif arr[mid] < k:
+            s = mid+1
+        else:
+            temp = arr[mid]
+            e = mid-1
+           
+    return temp
+
+print(search(arr))
