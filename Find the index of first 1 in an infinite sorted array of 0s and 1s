@@ -1,0 +1,34 @@
+Prob: https://www.geeksforgeeks.org/find-index-first-1-infinite-sorted-array-0s-1s/
+
+Concept: Infinte sorted array + 1st occurance of k
+
+def search_inf(arr,k):
+    start = 0
+    end = 1
+
+    while k > arr[end]:
+        start = end
+        end = end*2
+    return binary_search(arr,start,end,k)
+
+def binary_search(arr,start,end,k):
+    temp = 0
+    while start <= end:
+        mid = start + (end-start)//2
+        if arr[mid] == k:
+            temp = mid
+            end = mid-1
+        elif k > arr[mid]:
+            start = mid+1
+        else:
+            end = mid-1
+    return temp
+
+
+
+
+
+arr = [1, 1, 1, 1, 1, 1]
+k = 1
+print(search_inf(arr,k))
+
