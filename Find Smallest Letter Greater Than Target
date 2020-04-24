@@ -25,3 +25,32 @@ class Solution:
                 #temp = arr[mid]
                 start = mid+1
         return arr[start]
+        
+ Other Variant:
+ 
+ class Solution:
+    def nextGreatestLetter(self, arr: List[str], target: str) -> str:
+        start = 0
+        end = len(arr) - 1
+        temp = 0
+        if target < arr[0]:
+            return arr[0]
+        if target >= arr[-1]:
+            return arr[0]
+        while start <= end:
+            mid = start + (end-start)//2
+            if target == arr[mid]:
+                start = mid+1
+
+
+            if target < arr[mid]:
+                temp = mid
+                end = mid-1
+                #look in left
+
+
+            elif target > arr[mid]:
+                start = mid+1
+
+
+        return arr[temp]
