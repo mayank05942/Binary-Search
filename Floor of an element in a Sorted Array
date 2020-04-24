@@ -20,39 +20,27 @@ output is -1.
 
 
 Code:
-arr = [1, 2, 4, 6, 10, 12, 14]
-k = 7
-def search(arr):
-    s = 0
-    e = len(arr)-1
-    
-    # Two Base Cases:
-    
-    if arr[0] > k:   # if the 1st element of the array is largest the element whose floor needs to be find then there is no such number
-        return -1
-    if k > arr[-1]: # if k is greater than the largest element in the array return the largest element
-        return arr[e]
-
-    temp = 0  # variable to store the min value
-    
-    while s <= e:
-        mid = s + (e-s)//2
+def search(arr,k):
+    start = 0
+    end = len(arr)-1
+    if k < arr[0]:
+        return "Floor cannot be calculated"
+    if k > arr[-1]:
+        return arr[-1]
+    temp = 0
+    while start <= end:
+        mid = start + (end-start)//2
         if arr[mid] == k:
             return arr[mid]
-        elif k < arr[mid]:  # Look in the left half
-            e = mid-1
-            if arr[mid] < k:  # if middle turns out to the lesser than k store it in temp and look for right half for larger value. 
-                if arr[mid] > temp:
-                    temp = arr[mid]
-                    s = mid+1
+        elif arr[mid] > k:
+            # we want small elements than k hence we will look in left
+            end = mid-1
         else:
-            s = mid+1
-            if arr[mid] < k:
-                if arr[mid] > temp:
-                    temp = arr[mid]
-                    s = mid+1
-    return temp  # return the updated floor value
+            # hence we have found one candidate but we have to check if it is the greatest among them.
+            temp = arr[mid]
+            start = mid+1
+    return temp
 
-print(search(arr))
+print(search(arr,k))
 
 
