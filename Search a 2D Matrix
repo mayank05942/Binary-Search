@@ -1,0 +1,26 @@
+Leetcode: https://leetcode.com/problems/search-a-2d-matrix/
+
+Code:
+
+class Solution:
+    def searchMatrix(self, arr: List[List[int]], k: int) -> bool:
+        def search(arr,k):
+            start = 0
+            end = len(arr)-1
+            while start <= end:
+                mid = (start+end)//2
+                if arr[mid] == k:
+                    return mid
+                elif arr[mid] > k:
+                    end = mid-1
+                else:
+                    start = mid+1
+            return -1
+        lis = []
+        for items in arr:
+            x = search(items,k)
+            lis.append(x)
+        for items in lis:
+            if items != -1:
+                return True
+        return False
