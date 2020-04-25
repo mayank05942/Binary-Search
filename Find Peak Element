@@ -1,0 +1,40 @@
+In this problem, it feels binary search would go wrong since we are not sure if either side could have increasing or decreasing numbers.
+
+However, the key point is that a peak would defintely be present and the answer from either side of the array after
+creating the half in binary search is fine and so binary search works.
+
+If we were asked to only find one peak then binary search would probably fail since we would not be sure of which direction 
+to go in as the array is not sorted.
+Binary search works since :
+
+either peak can be answer[sorted property which is strictly required for BS gets countered]
+peak definition can be checked with 2 indices adjacent to the mid value.
+
+Code:
+
+class Solution:
+        
+    def findPeakElement(self, arr: List[int]) -> int:
+        
+        start = 0
+        end = len(arr)-1
+        if len(arr) == 1:
+            return 0
+        while start <= end:
+            mid = start + (end-start)//2
+            if mid == 0:
+                if arr[mid] > arr[mid+1]:
+                    return mid
+            if mid == len(arr)-1:
+                if arr[mid] > arr[mid-1]:
+                    return mid
+            else:
+
+                if arr[mid] > arr[mid+1] and arr[mid] > arr[mid-1]:
+                    return mid
+                elif arr[mid+1] > arr[mid]:
+                    # look for right
+                    start = mid+1
+                else:
+                    end = mid-1
+        
