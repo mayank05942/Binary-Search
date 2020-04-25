@@ -1,0 +1,14 @@
+Bitonic array:
+
+An array whose elements first increases monotonically and then decreases montonically is a bitonic array.
+
+Ex : {8, 10, 20, 80, 100, 200, 400, 500, 3, 2, 1} is bitonic array
+
+Ex : {8, 10, 10 , 20, 80, 100, 200, 400, 500, 3, 2, 1} is not a bitonic array as numbers are repeated in this case.
+
+Difference between Bitonic and Normal Array:
+
+In binotic array there will be only 1 peak value which satisfy mid > mid+1 and mid > mid-1 property contrary to normal array where there 
+could be mutiple such peaks.
+
+Sol : Apply the same code of searching the peak element using binary search.
