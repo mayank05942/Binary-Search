@@ -14,27 +14,26 @@ For x = 20:   floor  = 19,  ceil doesn't exist in array
 
 Code:
 
-arr = [1, 2, 8,10,10,12,19]
-k = 0
-def search(arr):
-    s = 0
-    e = len(arr)-1
-    if arr[0] > k:
+def search(arr,k):
+    start = 0
+    end = len(arr)-1
+    if k < arr[0]:
         return arr[0]
     if k > arr[-1]:
-        return "does not exit"
-
+        return "Ceil does not exist"
     temp = 0
-    while s <= e:
-        mid = s + (e-s)//2
+    while start <= end:
+        mid = start + (end-start)//2
         if arr[mid] == k:
             return arr[mid]
         elif arr[mid] < k:
-            s = mid+1
-        else:
+            #look in right half for bigger elements
+            start = mid+1
+        elif arr[mid] > k:
+            # if mid is greater than k then it is a possible candidate
             temp = arr[mid]
-            e = mid-1
-           
+            # but we have to look for min hence look in the left half
+            end = mid-1
     return temp
 
-print(search(arr))
+print(search(arr,k))
