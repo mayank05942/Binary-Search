@@ -1,5 +1,7 @@
 Leetcode: https://leetcode.com/problems/search-a-2d-matrix/
 
+When only Rows are sorted.
+
 Code:
 
 class Solution:
