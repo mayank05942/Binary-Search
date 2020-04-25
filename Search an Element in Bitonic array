@@ -1,0 +1,73 @@
+Given a bitonic sequence of n distinct elements, write a program to find a given element x in the bitonic sequence in O(log n) time.
+A Bitonic Sequence is a sequence of numbers which is first strictly increasing then after a point strictly decreasing.
+
+Examples:
+
+Input :  arr[] = {-3, 9, 8, 20, 17, 5, 1};
+         key = 20
+Output : Found at index 3
+
+Input :  arr[] = {5, 6, 7, 8, 9, 10, 1, 2, 3};
+         key = 30
+Output : Not Found 
+_____________________________________________________________________________________________________________________________________
+
+Idea: A Bitonic array is sorted in increasing order from 0 to peak_idx-1 and in decreasing order from peak_idx+1 to len(arr).
+
+hence first find the peak index then apply two binary searches in left and right half.
+
+_____________________________________________________________________________________________________________________________________-
+Code:
+
+arr = [3, 9, 8, 20, 17, 5, 1]
+k = 30
+
+def find_peak(arr):
+    start = 0
+    end = len(arr)-1
+    while start <= end:
+        mid = start + (end-start)//2
+        if mid == 0:
+            if arr[mid] > arr[mid+1]:
+                return mid
+        elif mid == len(arr)-1:
+            if arr[mid] > arr[mid-1]:
+                return mid
+        elif arr[mid] > arr[mid+1] and arr[mid] > arr[mid-1]:
+            return mid
+        elif arr[mid+1] > arr[mid]:
+            start = mid+1
+        else:
+            end = mid-1
+
+def normal_search(arr,start,end,k):
+    while start <= end:
+        mid = (start+end)//2
+        if arr[mid] == k:
+            return mid
+        elif arr[mid] > k:
+            end = mid-1
+        else:
+            start = mid+1
+    return -1
+
+def reverse_search(arr,start,end,k):
+    while start <= end:
+        mid = (start+end)//2
+        if arr[mid] == k:
+            return mid
+        elif arr[mid] > k:
+            start = mid+1
+        else:
+            end = mid-1
+    return -1
+max_idx = find_peak(arr)
+x = normal_search(arr,0,max_idx-1,k)
+y = reverse_search(arr,max_idx+1,len(arr)-1,k)
+
+if x != -1 and y == -1:
+    print(f"Index is {x}")
+elif x == -1 and y != -1:
+    print(f"Index is {y}")
+else:
+    print("Not Found")
