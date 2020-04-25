@@ -1,0 +1,30 @@
+Leetcode: https://leetcode.com/problems/search-a-2d-matrix-ii/
+
+When both rows and col are in ascending order.
+
+class Solution:
+    def searchMatrix(self, arr, k):
+        """
+        :type matrix: List[List[int]]
+        :type target: int
+        :rtype: bool
+        """
+        if not arr or not arr[0]:
+			
+            return False
+        row = len(arr)
+        col = len(arr[0])
+        
+        i = 0
+        j = col -1
+        while i < len(arr) and j >= 0:
+            
+            mid = arr[i][j]
+            if mid == k:
+                return True
+            elif mid > k:
+                j -= 1
+            else:
+                i = i+1
+
+        return False
