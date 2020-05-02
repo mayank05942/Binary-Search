@@ -1,0 +1,32 @@
+Question: https://leetcode.com/problems/sqrtx/
+
+Concept:  sqrt(x) = y --->   x = y ^2 --> hence we need to find an element such that on squaring it we get x
+
+Now that element should always be lesser than x hence our search space will always be between 1 to x
+
+What if it is never equal to x? ---> In that case return floor
+
+Hence this prob is a variation of finding floor of an element.
+
+
+
+Code:
+
+class Solution:
+    def mySqrt(self, num: int) -> int:
+        start = 0
+        end = num
+        
+        temp = 0
+        while start <= end:
+            mid = start + (end-start)//2
+            if mid**2 == num:
+                return mid
+            elif mid**2 > num:
+               
+                end = mid-1
+            else:
+                
+                temp = mid
+                start = mid+1
+        return temp
