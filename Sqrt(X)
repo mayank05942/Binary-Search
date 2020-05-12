@@ -1,5 +1,7 @@
 Question: https://leetcode.com/problems/sqrtx/
 
+__________________________________________________________________________________________________________________________
+
 Concept:  sqrt(x) = y --->   x = y ^2 --> hence we need to find an element such that on squaring it we get x
 
 Now that element should always be lesser than x hence our search space will always be between 1 to x
@@ -8,7 +10,12 @@ What if it is never equal to x? ---> In that case return floor
 
 Hence this prob is a variation of finding floor of an element.
 
+____________________________________________________________________________________________________________________________
 
+Update : One more variation of this prob: https://leetcode.com/problems/valid-perfect-square/
+
+
+______________________________________________________________________________________________________________________________
 
 Code:
 
