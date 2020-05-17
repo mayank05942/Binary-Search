@@ -1,24 +1,36 @@
 
 Leetcode: https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/
 
+_________________________________________________________________________________________________________________________________
 
+Explanation: Why we are searching for min element in unsorted part ??
 
 arr = [4,5,6,7,0,1,2]
 
+In normal sorted array next element is always greater than the prev element
+but 0 is less than 7 hence there is some discrepancy in array i.e [4,5,6,7,0] this is not sorted array
+and it is clear that the min element is in this array.
+
+Property of min element is --> it is always less than its prev and next element in the array
+
+______________________________________________________________________________________________________________________________
 
 def search(arr):
     start = 0
     end = len(arr)-1
     N = len(arr)
+    
     # Check if array is rotated sorted or simply sorted:
-    if arr[start] <= arr[end]:
+    
+    if arr[start] <= arr[end]:  # if this is true then it is a sorted array only return the 1st element.
         return start
 
     # Now check if middle element is min for not
 
     while start <= end:
         mid = start + (end-start)//2
-        next = (mid+1)%N
+        
+        next = (mid+1)%N     # since it is rotated
         prev = (mid-1+N)%N
 
         if arr[mid] <= arr[next] and arr[mid] <= arr[prev]:
@@ -29,6 +41,7 @@ def search(arr):
         elif arr[mid] <=  arr[end]:
             # means right side is sorted search in left half
             end = mid-1
+            
         elif arr[mid] >= arr[start]:
             # means left half is sorted look in right for min
             start = mid+1
