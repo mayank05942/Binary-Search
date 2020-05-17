@@ -1,15 +1,28 @@
 Leetcode: https://leetcode.com/problems/search-in-rotated-sorted-array/
+___________________________________________________________________________________________________________________________________
 
+Explanation:
+
+# nums = [4,5,6,7,0,1,2], target = 0
+# if 0 is the pivot of rotated sorted array then we have two sorted subarrays:
+# From [4,5,6,7] i.e nums[0:pivot-1]
+# From [0,1,2] i.e nums[pivot:end]
+
+# So find the pivot point and apply two binary searches on each sides.
+bs(arr,0,pv-1,k) and bs(arr,pv,len(arr)-1,k)
+
+______________________________________________________________________________________________________________________________________
 Code:
 
 
 class Solution:
     def search(self, arr: List[int], k: int) -> int:
+    
         if len(arr) == 0:
             return -1
         
         
-        def search_min(arr):
+        def search_min(arr):   # find the pivot point of rotated array
             start = 0
             end = len(arr)-1
             N = len(arr)
@@ -36,6 +49,7 @@ class Solution:
                     # means left half is sorted look in right for min
                     start = mid+1
             return -1
+            
         min_idx = search_min(arr)
         
         # call Two Binary search as we have now two sorted arrays:
