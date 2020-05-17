@@ -1,58 +1,62 @@
-Leetcode:https://leetcode.com/discuss/interview-question/algorithms/124724/facebook-onsite-count-occurrences-of-a-number-in-a-sorted-array
+Prob: https://leetcode.com/discuss/interview-question/algorithms/124724/facebook-onsite-count-occurrences-of-a-number-in-a-sorted-array
 
+________________________________________________________________________________________________________________________________________
 
-Note: This is slight variation of the above question:
-      Just return (last_index - first_index)+1
+Explanation: 
+
+Find the idx of first occurance of the element
+Find the idx of second occurance of the element
+return second idx - first idx +1
       
+# Thisquestion is variation of the First and last occurance of the element in a sorted array prob.
  
- 
- 
-arr = [1,1,2,2,2,2,3]
-k = 4
-def search_first(arr,k):
+________________________________________________________________________________________________________________________________________
+
+nums = [3,5,5,5,5,7,8,8]
+target = 6
+
+def first_occurance(arr,k):
     start = 0
-    end = len(arr) -1
+    end = len(arr)-1
+    temp = -1
+    while start <= end:
+        mid = start + (end-start)//2
+        if arr[mid] == k:
+            # one occurance has been found
+            # check if it is the first occurance or not
+            temp = mid
+            end = mid-1
+        elif arr[mid] > k:
+            end = mid-1
+        else:
+            start = mid+1
+    return temp
+
+x = first_occurance(nums,target)
+
+def second_occurance(arr,k):
+    start = 0
+    end = len(arr)-1
     temp = -1
     while start <= end:
         mid = start + (end-start)//2
         if arr[mid] == k:
             temp = mid
-            # Check for 1st occurance
-            end = mid-1
-
-
-        elif k > arr[mid]:
+            #check if there exits a number equal to k in the right half
             start = mid+1
+        elif arr[mid] > k:
+            end = mid-1
         else:
-            end = mid-1
-    if temp != -1:
-        return temp
-    else:
-        return -1
-
-def search_second(arr,k):
-    start = 0
-    end = len(arr) -1
-    temp = -1
-    while start <= end:
-        mid = start + (end-start)//2
-        if arr[mid] == k:
-            temp = mid
-            # Check for Last occurance
             start = mid+1
+    return temp
+
+y = second_occurance(nums,target)
+
+if y == -1 and x == -1:
+    print(0)
+else:
+    print(y-x+1)
 
 
-        elif k > arr[mid]:
-            start = mid+1
-        else:
-            end = mid-1
-    if temp != -1:
-        return temp
-    else:
-        return -1
 
-lis = []
-lis.append(search_first(arr,k))
-lis.append(search_second(arr,k))
-print(lis)
-print(lis[1]-lis[0]+1)
+
