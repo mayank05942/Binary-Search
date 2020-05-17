@@ -1,3 +1,8 @@
+Prob: https://leetcode.com/problems/find-peak-element/
+________________________________________________________________________________________________________________________________
+
+Explanation: Return any of the peak
+
 In this problem, it feels binary search would go wrong since we are not sure if either side could have increasing or decreasing numbers.
 
 If we were asked to only find one peak then binary search would probably fail since we would not be sure of which direction 
@@ -5,6 +10,16 @@ to go in as the array is not sorted.
 Binary search works since :
 either peak can be answer[sorted property which is strictly required for BS gets countered]
 peak definition can be checked with 2 indices adjacent to the mid value.
+
+Most people have figured out the binary search solution but are not able to understand how its working. I will try to explain it simply. 
+What we are essentially doing is going in the direction of the rising slope(by choosing the element which is greater than current). 
+How does that guarantee the result? Think about it, there are 2 possibilities.
+a) rising slope has to keep rising till end of the array 
+b) rising slope will encounter a lesser element and go down.
+In both scenarios we will have an answer. 
+In a) the answer is the end element because we take the boundary as -INFINITY 
+b) the answer is the largest element before the slope falls. Hope this makes things clearer.
+_________________________________________________________________________________________________________________________________
 
 Code:
 
