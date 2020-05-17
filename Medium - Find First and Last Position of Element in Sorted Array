@@ -1,51 +1,54 @@
-Leetcode:https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/
+Leetcode: https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/
+
+__________________________________________________________________________________________________________________
+
+Explanation: 1st occurance check => first find the target -> if found, check its left half--->if it is the first occurance
+                                    then the target will not be present in the left half.
+             
+             2nd occurance check => find the target -> then check in right half --> if it is the second occurance then there 
+                                    will not any element in the right half of the array
 
 
-Code:
+___________________________________________________________________________________________________________________
 
-def search_first(arr,k):
-    start = 0
-    end = len(arr) -1
-    temp = -1
-    while start <= end:
-        mid = start + (end-start)//2
-        if arr[mid] == k:
-            temp = mid
-            # Check for 1st occurance
-            end = mid-1
+class Solution:
+    def searchRange(self, nums: List[int], target: int) -> List[int]:
+    
+        def first_occurance(arr,k):
+            start = 0
+            end = len(arr)-1
+            temp = -1
+            while start <= end:
+                mid = start + (end-start)//2
+                if arr[mid] == k:
+                    # one occurance has been found
+                    # check if it is the first occurance or not
+                    temp = mid
+                    end = mid-1
+                elif arr[mid] > k:
+                    end = mid-1
+                else:
+                    start = mid+1
+            return temp
 
+        #print(first_occurance(nums,target))
 
-        elif k > arr[mid]:
-            start = mid+1
-        else:
-            end = mid-1
-    if temp != -1:
-        return temp
-    else:
-        return -1
+        def second_occurance(arr,k):
+            start = 0
+            end = len(arr)-1
+            temp = -1
+            while start <= end:
+                mid = start + (end-start)//2
+                if arr[mid] == k:
+                    temp = mid
+                    #check if there exits a number equal to target in the right half
+                    start = mid+1
+                elif arr[mid] > k:
+                    end = mid-1
+                else:
+                    start = mid+1
+            return temp
 
-def search_second(arr,k):
-    start = 0
-    end = len(arr) -1
-    temp = -1
-    while start <= end:
-        mid = start + (end-start)//2
-        if arr[mid] == k:
-            temp = mid
-            # Check for Last occurance
-            start = mid+1
-
-
-        elif k > arr[mid]:
-            start = mid+1
-        else:
-            end = mid-1
-    if temp != -1:
-        return temp
-    else:
-        return -1
-
-lis = []
-lis.append(search_first(arr,k))
-lis.append(search_second(arr,k))
-print(lis)
+        #print(second_occurance(nums,target))
+        
+        return [first_occurance(nums,target),second_occurance(nums,target)]
