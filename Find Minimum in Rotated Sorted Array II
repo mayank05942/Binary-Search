@@ -1,0 +1,40 @@
+Prob: https://leetcode.com/problems/find-minimum-in-rotated-sorted-array-ii/
+_______________________________________________________________________________________________________________________________________________________
+
+Explanation:
+
+Let l = 0, r = nums.length - 1
+Our min will be in [l, r] since data is sorted but rotated we can drop easily drop left and right sub array based on mid value.
+mid = l + (r - l) / 2, Avoid integer overflow in case large l and r values.
+Case 1: nums[mid] > nums[r] ==> min will be in [mid + 1, r] hence l = mid + 1
+Case 2: nums[mid] < nums[r] ==> min will be in [l, mid] hence r = mid
+Case 3: nums[mid] = nums[r] ==> we can't sure where will be min in this case just reduce right bound this is the case of linear search situation, r--
+
+_______________________________________________________________________________________________________________________________________________________________
+
+Code:
+
+class Solution:
+    def findMin(self, nums: List[int]) -> int:
+        if len(nums) == 0:
+            return -1
+        if len(nums) == 1:
+            return nums[0]
+        if len(nums) == 2:
+            return min(nums)
+        
+        def search(arr):
+            start = 0
+            end = len(arr)-1
+            N = len(arr)
+            while start <= end:
+                mid = start + (end-start)//2
+                
+                if arr[mid] > arr[end]:
+                    start = mid+1
+                elif arr[mid] < arr[end]:
+                    end = mid
+                else:
+                    end -= 1
+            return arr[start]
+        return search(nums)
