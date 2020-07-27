@@ -10,6 +10,14 @@ Case 1: nums[mid] > nums[r] ==> min will be in [mid + 1, r] hence l = mid + 1
 Case 2: nums[mid] < nums[r] ==> min will be in [l, mid] hence r = mid
 Case 3: nums[mid] = nums[r] ==> we can't sure where will be min in this case just reduce right bound this is the case of linear search situation, r--
 
+
+For this case, we have 3 subcases:
+
+Normal: 0 1 2 3 4 5 6 => A[lo]<A[hi] e.g. (0<6)
+Left major: 3 4 5 6 0 1 2 => A[mid]>A[hi] e.g. (6>2)
+Right major: 5 6 0 1 2 3 4 => A[mid]<A[lo] e.g. (1<5)
+Note: left/right major is mine way to express 3 cases only.
+
 _______________________________________________________________________________________________________________________________________________________________
 
 Code:
