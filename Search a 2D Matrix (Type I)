@@ -36,7 +36,7 @@ class Solution:
 Method 2:  Consider the matrix as 1D array with elements from index 0 to index (mn) and the index mapping will be as follows: row = element // total_col
             and col = element % total_col
 ----------
-TC : O(log(m*n))
+TC : O(log(m) + log(n)), or in other words, O(log(mn)).
 
 class Solution:
     def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
