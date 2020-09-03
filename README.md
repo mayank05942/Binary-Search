@@ -9,7 +9,7 @@ Binary Search in an array :
                              
 Note: Here the array may consists of numbers or alphabets.
 *****
-##Type 2
+# Type 2
 
 Binary search in a matrix:
 * Matrix is sorted row wise
