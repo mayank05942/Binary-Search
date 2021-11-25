@@ -79,7 +79,7 @@ def search(arr):
     
  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
  
- # Alternate Solutiom
+ # Alternate Solution
  
       def ss(arr,k):
             start = 0
@@ -88,12 +88,12 @@ def search(arr):
                 mid = start + (end-start) // 2
                 if arr[mid] == k:
                     return mid
-                if arr[start] <= arr[mid]:
+                if arr[start] <= arr[mid]:   # To ensure that we are in the sorted party of the array
                     if k >= arr[start] and k <= arr[mid]:
                         end = mid -1
                     else:
                         start = mid +1
-                else:
+                else:                                      # is equivalent to if arr[mid] <= arr[end]
                     if k >= arr[mid] and k <= arr[end]:
                         start = mid +1
                     else:
